@@ -1,5 +1,6 @@
 from turtle import Turtle
-STARTING_POSITIONS = [(0, 0), (-10, 0), (-20, 0)]
+import time
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 STEPS = 20
 
 class Snake():
@@ -9,11 +10,15 @@ class Snake():
         self.create_snake()
 
     def create_snake(self):
-        for i in range(3):
-            new_part = Turtle("square")
-            self.parts.append(new_part)
-            self.parts[i].penup()
-            self.parts[i].goto(STARTING_POSITIONS[i])
+        for pos in STARTING_POSITIONS:
+            self.add_part(pos)
+
+    def add_part(self, position):
+        new_part = Turtle("square")
+        new_part.penup()
+        new_part.goto(position)
+        self.parts.append(new_part)
+
 
     def move(self):
         for i in range(len(self.parts) -1 , 0, -1):
@@ -23,15 +28,21 @@ class Snake():
         self.parts[0].fd(STEPS)
 
 
+    def grow(self):
+        self.add_part(self.parts[-1].position())
+
     def game_over(self):
         if self.parts[0].xcor() >= 290 or self.parts[0].xcor() <= -300 or self.parts[0].ycor() >= 300 or self.parts[0].ycor() <= -290:
             return True
+        for part in self.parts[1:]:
+            if self.parts[0].distance(part) < 10 and self.parts[0].distance(part) > 0:
+                return True
         
     def move_up(self):
         if self.parts[0].heading() != 270:
             self.parts[0].setheading(90)
             
-
+            
     def move_right(self):
         if self.parts[0].heading() != 180:
             self.parts[0].setheading(0)
@@ -40,7 +51,7 @@ class Snake():
     def move_left(self):
         if self.parts[0].heading() != 0:
             self.parts[0].setheading(180)  
-              
+            
 
     def move_down(self):
         if self.parts[0].heading() != 90:
