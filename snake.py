@@ -31,7 +31,8 @@ class Snake():
     def grow(self):
         self.add_part(self.parts[-1].position())
 
-    def game_over(self):
+
+    def collision(self):
         if self.parts[0].xcor() >= 290 or self.parts[0].xcor() <= -300 or self.parts[0].ycor() >= 300 or self.parts[0].ycor() <= -290:
             return True
         for part in self.parts[1:]:
@@ -56,4 +57,3 @@ class Snake():
     def move_down(self):
         if self.parts[0].heading() != 90:
             self.parts[0].setheading(270)
-            

@@ -1,10 +1,3 @@
-# time modülü ile zorluk seçimi?
-# duvarın diğer tarafından geçme
-# 2 kare büyülten büyük yemek
-# dönerken içinden geçmesin
-# yiyecek kendi içinde çıkmasın
-# tekrar oynamak ister misin?
-
 from turtle import Screen
 from snake import Snake
 from wall import Wall
@@ -15,13 +8,15 @@ import time
 window = Screen()
 window.setup(width = 600, height =600)
 window.bgcolor("#497036")
-window.title("Snake v23")
+window.title("Snake")
 window.tracer(0)
 
 snake = Snake()
 wall = Wall()
 food = Food()
 score = Scoreboard()
+
+difficulty = 0.05
 
 window.listen()
 window.onkey(key = "Up", fun = snake.move_up)
@@ -34,17 +29,25 @@ is_game_on = True
 while is_game_on:
 
     window.update()
-    time.sleep(0.03) 
+    time.sleep(difficulty) 
 
     snake.move()
 
     if snake.parts[0].distance(food) < 18:
         food.another_place()
+        for part in snake.parts:
+            if part.distance(food) < 10:
+                food.another_place()
         snake.grow()
         score.plus_score()
+        if difficulty > 0.015:
+            difficulty -= 0.001
 
-    if snake.game_over():
+    if snake.collision():
         score.game_over()
         is_game_on = False
 
-window.exitonclick()
+
+window.onkeypress(window.bye, "Escape")
+
+window.mainloop()
