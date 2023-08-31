@@ -15,7 +15,7 @@ class Snake():
             self.add_part(pos)
 
     def add_part(self, position):
-        # if eat the food add a segment to snake
+        # if snake eat the food add a segment to snake
         new_part = Turtle("square")
         new_part.penup()
         new_part.goto(position)
@@ -46,7 +46,7 @@ class Snake():
     def move_up(self):
         if self.parts[0].heading() != 270:
             self.parts[0].setheading(90)
-        self.press_key = True
+            self.press_key = True
             
     def move_right(self):
         if self.parts[0].heading() != 180:

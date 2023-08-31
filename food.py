@@ -12,5 +12,5 @@ class Food(Turtle):
         self.another_place()
 
     def another_place(self):
-        # if eat the food refresh the food place
+        # if snake eat the food refresh the food place
         self.goto(random.randint(-270, 270), random.randint(-270, 270))
