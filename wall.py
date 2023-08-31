@@ -8,7 +8,7 @@ class Wall:
         x = 290
         y = 300
         for i in range(236):
-
+            # Create wall positions
             if i < 59:
                 self.wall_positions.append((x,y))
                 x -= 10
@@ -21,6 +21,8 @@ class Wall:
             else:
                 self.wall_positions.append((x, y))
                 y += 10
+
+            # Create wall objects
             new_wall_part = Turtle("square")
             self.wall_parts.append(new_wall_part)
             self.wall_parts[i].penup()

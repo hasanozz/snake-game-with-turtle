@@ -11,6 +11,7 @@ class Scoreboard(Turtle):
         self.plus_score()
 
     def plus_score(self):
+        # if eat the food increase the score by 1 and write this
         self.clear()
         self.score += 1
         self.write(f"{self.score}",  align = "center", font=('Courier', 24, 'bold'))
@@ -20,9 +21,3 @@ class Scoreboard(Turtle):
         self.write("GAME OVER\n", align = "center", font=('Courier', 30, 'bold'))
         self.goto(0,-30)
         self.write("Press 'ESC' To Exit", align = "center", font=('Courier', 24, 'bold'))
-
-    def reset_scoreboard(self):
-        self.clear()
-        self.goto(-265, 250)
-        self.score = -1
-        self.plus_score()
