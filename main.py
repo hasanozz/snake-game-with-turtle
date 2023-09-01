@@ -35,20 +35,21 @@ def game():
     window.onkey(key = "Left", fun = snake.move_left)
     window.onkey(key = "Down", fun = snake.move_down)
 
-
-    while True:
+    is_game_active = True
+    while is_game_active:
 
         window.update()
         time.sleep(difficulty) 
 
-        if snake.press_key: # press the arrow key to start game
+        if snake.press_key: # press 'Up', 'Down' or 'Right' arrow key to start the game
             snake.move()
 
         if snake.collision(): # check the collision
+            is_game_active = False
             score.game_over()
 
-            window.onkey(key = "space", fun = again)
-            window.onkeypress(key = "Escape", fun = window.bye)
+            window.onkey(key = "space", fun = again) # if the player press 'space' refresh the game
+            window.onkeypress(key = "Escape", fun = window.bye) # if the player press 'esc' exit the game
             window.mainloop()
 
         if snake.parts[0].distance(food) < 18:
@@ -60,7 +61,7 @@ def game():
                     food.another_place()
 
             snake.grow()
-            score.plus_score()
+            score.increase_score()
 
             if difficulty > 0.015: 
                 # if the snake's speed greater than 0.015, reduce the difficulty when the snake eats
